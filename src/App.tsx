@@ -13,6 +13,7 @@ function App() {
 
     return (
         <>
+            {/*<Navbar />*/}
             <RouterProvider router={createBrowserRouter([
                 {
                     path: "/",

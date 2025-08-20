@@ -8,7 +8,14 @@ export default function PetOverview() {
     const navigate = useNavigate();
 
     return <div>
-
+        {
+            allPets.map(pet => {
+                return <div key={pet.id}>
+                    navigate("/pets/" + pet.id);
+                    {pet.name}
+                </div>
+            })
+        }
 
     </div>
 
