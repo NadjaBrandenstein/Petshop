@@ -9,7 +9,7 @@ import PetOverview from "./PetOverview.tsx";
 
 function App() {
 
-    initializeDataForApplication()
+    //initializeDataForApplication()
 
     return (
         <>

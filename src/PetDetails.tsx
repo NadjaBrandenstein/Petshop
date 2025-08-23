@@ -15,15 +15,20 @@ export interface Pet{
 }
 
 export default function PetDetails() {
+    const { petId } = useParams<PetIdParameter>();
+    const [allPets] = useAtom(AllPetsAtoms);
 
-    const params = useParams<PetIdParameter>();
-    const [allPets, setAllPets] = useAtom(AllPetsAtoms)
-    const pet = allPets.find(p => p.id == params.petId);
+    const pet = allPets.find(p => p.id === petId);
 
-    return <div>
+    if (!pet) return <div>Pet not found!</div>;
 
-
-
-    </div>;
+    return (
+        <div className="p-6 max-w-xl mx-auto bg-white shadow rounded-md">
+            <img src={pet.imgurl} alt={pet.name} className="w-full h-64 object-cover rounded-md"/>
+            <h1 className="text-2xl font-bold mt-4">{pet.name}</h1>
+            <p className="text-gray-700 mt-2">Breed: {pet.breed}</p>
+            <p className="text-gray-700 mt-1">Status: {pet.sold ? "Sold" : "Available"}</p>
+        </div>
+    );
 
 }
