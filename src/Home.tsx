@@ -22,7 +22,7 @@ export default function Home() {
                 <div className="menu-dropdown">
                     <div onClick={() => navigate("/pets")}> Pets </div>
                     <div onClick={() => navigate("/newpet")}> New Pet </div>
-                    <div onClick={() => navigate("/updatepet")}> Update Pet </div>
+                    <div onClick={() => navigate("/updatepet/${pet.id}")}> Update Pet </div>
                 </div>
             )}
             </div>

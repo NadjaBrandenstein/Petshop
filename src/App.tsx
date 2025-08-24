@@ -4,6 +4,7 @@ import {createBrowserRouter, RouterProvider} from "react-router";
 import Home from "./Home.tsx";
 import PetDetails from "./PetDetails.tsx";
 import NewPet from "./NewPet.tsx";
+import UpdatePet from "./UpdatePet.tsx";
 
 function App() {
 
@@ -25,8 +26,11 @@ function App() {
                 {
                     path: "/newpet",
                     element: <NewPet/>
+                },
+                {
+                    path: "/updatepet/:petId",
+                    element: <UpdatePet/>
                 }
-
             ])}/>
         </>
     )
