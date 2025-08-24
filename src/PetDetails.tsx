@@ -53,7 +53,7 @@ export default function PetDetails() {
             <p><strong>Breed: </strong>{pet.breed}</p>
             <p><strong>Status: </strong>{pet.sold}</p>
 
-    </div>
+        </div>
     )
 
 }

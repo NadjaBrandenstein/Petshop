@@ -11,8 +11,7 @@ export default function Home() {
     return <div>
 
         <div className="navbar">
-            Nav bar:
-
+            <div className={"relative"}>
             <button
                 className="text-2xl md:hidden focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -20,25 +19,14 @@ export default function Home() {
                 ☰
             </button>
             {menuOpen && (
-                <div >
-                    <div
-                        onClick={() => navigate("/pets")}
-                    >
-                        Pets
-                    </div>
-                    <div
-                        onClick={() => navigate("/newpet")}
-                    >
-                        New Pet
-                    </div>
-                    <div
-                        onClick={() => navigate("/updatepet")}
-                    >
-                        Update Pet
-                    </div>
+                <div className="menu-dropdown">
+                    <div onClick={() => navigate("/pets")}> Pets </div>
+                    <div onClick={() => navigate("/newpet")}> New Pet </div>
+                    <div onClick={() => navigate("/updatepet")}> Update Pet </div>
                 </div>
             )}
-            <h1 className="text-xl font-bold flex-grow text-center md:text-left">
+            </div>
+            <h1 className="navbar-text">
                 Pet Shop
             </h1>
 

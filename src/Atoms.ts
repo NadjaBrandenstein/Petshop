@@ -8,12 +8,9 @@ export async function fetchPetById(
     allPets: Record<string, Pet>,
     setAllPets: (pets: Record<string, Pet>) => void
 ) {
-    const res = await fetch(`https://api-divine-grass-2111.fly.dev/GetPetById/${id}`);
-    if (!res.ok) {
-        throw new Error(`Failed to fetch pet with id ${id}`);
-    }
-
+    const res = await fetch(`https://api-divine-grass-2111.fly.dev/GetPetById?id=${id}`);
     const pet: Pet = await res.json();
+
     setAllPets({ ...allPets, [pet.id]: pet });
 }
 
