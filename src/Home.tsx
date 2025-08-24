@@ -34,7 +34,7 @@ export default function Home() {
 
         </div>
             <div>
-                <h1 className="text-2xl font-bold mb-6">Available Pets</h1>
+                <h2 className="heading">Available Pets</h2>
 
                 <div>
                     {Object.values(allPets).map(pet => (
@@ -49,10 +49,10 @@ export default function Home() {
                                 className="pet-image"
                             />
                             <h2 className="text-lg font-bold mt-2">{pet.name}</h2>
-                            <p className="text-sm text-gray-600">{pet.breed}</p>
+                            {/*<p className="text-sm text-gray-600">{pet.breed}</p>
                             <p className="text-sm">
                                 {pet.sold ? "Sold" : "Available"}
-                            </p>
+                            </p>*/}
                         </div>
                     ))}
                 </div>

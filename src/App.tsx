@@ -3,6 +3,7 @@ import {initializeDataForApplication} from "./initializeDataForApplication.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Home from "./Home.tsx";
 import PetDetails from "./PetDetails.tsx";
+import NewPet from "./NewPet.tsx";
 
 function App() {
 
@@ -20,6 +21,10 @@ function App() {
                 {
                     path: "/pets/:petsId",
                     element: <PetDetails/>
+                },
+                {
+                    path: "/newpet",
+                    element: <NewPet/>
                 }
 
             ])}/>

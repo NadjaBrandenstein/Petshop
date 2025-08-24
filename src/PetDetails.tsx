@@ -44,7 +44,7 @@ export default function PetDetails() {
 
     return (
         <div className="pet-details">
-            <h2>{pet.name}</h2>
+            <h2>{pet.name ?? "Loading..."}</h2>
             <img
                 src={pet.imgurl}
                 alt={pet.name}

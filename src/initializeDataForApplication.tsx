@@ -10,11 +10,7 @@ export function initializeDataForApplication() {
         fetch("https://api-divine-grass-2111.fly.dev/GetPets")
             .then(result => {
                 result.json().then(allPets => {
-                    const petsMap: Record<string, any> = {};
-                    allPets.forEach((pet: any) => {
-                        petsMap[pet.id] = pet;
-                    })
-                    setAllPets(petsMap)
+                    setAllPets(allPets);
                 })
             })
 
