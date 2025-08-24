@@ -1,6 +1,7 @@
 import {useParams} from "react-router";
-import {AllPetsAtoms} from "./Atoms.ts";
+import {AllPetsAtoms, fetchPetById} from "./Atoms.ts";
 import {useAtom} from "jotai";
+import {useEffect, useState} from "react";
 
 export type PetIdParameter = {
     petId: string;
@@ -15,20 +16,44 @@ export interface Pet{
 }
 
 export default function PetDetails() {
-    const { petId } = useParams<PetIdParameter>();
-    const [allPets] = useAtom(AllPetsAtoms);
+    const params = useParams();
+    const petId = params.petId ?? null;
+    const [allPets, setAllPets] = useAtom(AllPetsAtoms);
+    const [loading, setLoading] = useState(true);
 
-    const pet = allPets.find(p => p.id === petId);
+    useEffect(() => {
+        if (!petId) return;
 
-    if (!pet) return <div>Pet not found!</div>;
+        async function loadPet() {
+            if (allPets[petId]) {
+                setLoading(false);
+                return;
+            }
+            await fetchPetById(petId, allPets, setAllPets);
+            setLoading(false);
+        }
+
+        loadPet();
+    }, [petId, allPets, setAllPets]);
+
+    const pet = petId ? allPets[petId] : null;
+
+    if(loading) return <div>Loading...</div>;
+    if(!pet) return <div>Pet not found!</div>;
+
 
     return (
-        <div className="p-6 max-w-xl mx-auto bg-white shadow rounded-md">
-            <img src={pet.imgurl} alt={pet.name} className="w-full h-64 object-cover rounded-md"/>
-            <h1 className="text-2xl font-bold mt-4">{pet.name}</h1>
-            <p className="text-gray-700 mt-2">Breed: {pet.breed}</p>
-            <p className="text-gray-700 mt-1">Status: {pet.sold ? "Sold" : "Available"}</p>
-        </div>
-    );
+        <div className="pet-details">
+            <h2>{pet.name}</h2>
+            <img
+                src={pet.imgurl}
+                alt={pet.name}
+                className="pet-details-image"
+            />
+            <p><strong>Breed: </strong>{pet.breed}</p>
+            <p><strong>Status: </strong>{pet.sold}</p>
+
+    </div>
+    )
 
 }
