@@ -18,7 +18,6 @@ function App() {
                     path: "/",
                     element: <Home/>
                 },
-
                 {
                     path: "/pets/:petsId",
                     element: <PetDetails/>
