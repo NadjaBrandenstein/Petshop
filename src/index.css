@@ -166,12 +166,16 @@ button:focus-visible {
 .pet-details {
     max-width: 500px;
     margin: 2rem auto;
-    background-color: #fff;
+    background-color: #f2e9ae;
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    text-align: center;
+    text-align: left;
 
+}
+
+.pet-name{
+    text-align: center;
 }
 
 .pet-details-image {

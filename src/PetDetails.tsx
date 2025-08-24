@@ -1,6 +1,8 @@
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 
 import {useEffect, useState} from "react";
+import {useAtom} from "jotai";
+import {AllPetsAtoms} from "./Atoms.ts";
 
 export type PetIdParameter = {
     petId: string;
@@ -16,40 +18,49 @@ export interface Pet{
 
 export default function PetDetails() {
 
-    const {petId} = useParams<PetIdParameter>();
+    const { petId } = useParams<{ petId: string }>();
+    const [allPets] = useAtom(AllPetsAtoms);
     const [pet, setPet] = useState<Pet | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!petId) {return}
-
-        async function fetchPet() {
-            try {
-                const response = await fetch ('https://api-divine-grass-2111.fly.dev/GetPetById?id=${petId}')
-
-                if(!response.ok) {throw new Error("Failed to fetch Pet");}
-
-                const data: Pet = await response.json();
-                setPet(data);
-            }
-            catch (err) {
-                console.error(err);
-            }
-            finally {
-                setLoading(false);
-            }
+        if (!petId) {
+            setLoading(false);
+            return;
         }
-        fetchPet();
 
-    }, [petId]);
+        // Try to get the pet from the atom first
+        if (allPets[petId]) {
+            setPet(allPets[petId]);
+            setLoading(false);
+        } else {
+            // fallback: fetch by ID
+            async function fetchPet() {
+                try {
+                    const response = await fetch(
+                        `https://api-divine-grass-2111.fly.dev/GetPetById?id=${petId}`
+                    );
+                    if (!response.ok) throw new Error("Failed to fetch pet");
+
+                    const data: Pet = await response.json();
+                    setPet(data);
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    setLoading(false);
+                }
+            }
+            fetchPet();
+        }
+    }, [petId, allPets]);
 
     if(loading) return <p>Loading...</p>;
     if(!pet) return <p>Pet not found</p>;
 
     return (
         <div className="pet-details">
-            <h2>{pet.name}</h2>
-            <img src={pet.imgurl} alt={pet.name} className="pet-details-img"/>
+            <h2 className="pet-name">{pet.name}</h2>
+            <img src={pet.imgurl} alt={pet.name} className="pet-details-image"/>
             <p>
                 <strong>Breed:</strong> {pet.breed}
             </p>

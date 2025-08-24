@@ -8,7 +8,7 @@ import UpdatePet from "./UpdatePet.tsx";
 
 function App() {
 
-    initializeDataForApplication()
+    //initializeDataForApplication()
 
     return (
         <>
@@ -19,7 +19,7 @@ function App() {
                     element: <Home/>
                 },
                 {
-                    path: "/pets/:petsId",
+                    path: "/pets/:petId",
                     element: <PetDetails/>
                 },
                 {
