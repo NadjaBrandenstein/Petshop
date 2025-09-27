@@ -3,7 +3,7 @@ import {useAtom} from "jotai";
 import {useNavigate} from "react-router";
 import {useState} from "react";
 
-export default function newPet() {
+export default function NewPet() {
 
     const [, setAllPets] = useAtom(AllPetsAtoms)
     const navigate = useNavigate()

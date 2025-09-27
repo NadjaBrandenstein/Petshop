@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
-
 import {useEffect, useState} from "react";
 import {useAtom} from "jotai";
 import {AllPetsAtoms} from "./Atoms.ts";
+import {useNavigate} from "react-router";
 
 export type PetIdParameter = {
     petId: string;
@@ -22,6 +22,7 @@ export default function PetDetails() {
     const [allPets] = useAtom(AllPetsAtoms);
     const [pet, setPet] = useState<Pet | null>(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!petId) {
@@ -29,7 +30,6 @@ export default function PetDetails() {
             return;
         }
 
-        // Try to get the pet from the atom first
         if (allPets[petId]) {
             setPet(allPets[petId]);
             setLoading(false);
@@ -67,6 +67,11 @@ export default function PetDetails() {
             <p>
                 <strong>Status:</strong> {pet.sold ? "Sold" : "Available"}
             </p>
+            <button
+                onClick={() => navigate(`/updatepet/${pet.id}`)}
+                className="newpet-button"
+            > Update Pet
+            </button>
         </div>
     )
 

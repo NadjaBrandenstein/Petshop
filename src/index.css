@@ -94,9 +94,9 @@ button:focus-visible {
 
 .navbar {
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* spread items */
-    position: relative; /* so we can absolutely center text */
+    align-items: Center;
+    justify-content: space-between;
+    position: relative;
     padding: 0.5rem 1rem;
 }
 
@@ -235,3 +235,44 @@ button:focus-visible {
     background-color: #e0c82f;
 }
 
+/* Update pet*/
+
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+/*Toggle checkbox*/
+
+.toggle-checkbox {
+    width: 40px;
+    height: 20px;
+    appearance: none;
+    background-color: red;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    vertical-align: middle;
+}
+
+.toggle-checkbox:checked {
+    background-color: #4ade80;
+}
+
+.toggle-checkbox::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 0.5px;
+    left: 1px;
+    transition: transform 0.2s;
+}
+
+.toggle-checkbox:checked::after {
+    transform: translateX(20px);
+}

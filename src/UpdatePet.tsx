@@ -13,12 +13,14 @@ export default function UpdatePet() {
     const [name, setName] = useState("");
     const [breed, setBreed] = useState("");
     const [imgurl, setImgurl] = useState("");
+    const [sold, setSold] = useState("false");
 
     useEffect(() => {
         if (pet) {
             setName(pet.name);
             setBreed(pet.breed);
             setImgurl(pet.imgurl);
+            setSold(pet.sold);
         }
     }, [pet]);
 
@@ -36,6 +38,7 @@ export default function UpdatePet() {
                     name,
                     breed,
                     imgurl,
+                    sold,
                 }),
             });
 
@@ -89,6 +92,15 @@ export default function UpdatePet() {
                     required
                     className="newpet-input"
                 />
+                <label className="flex items-center gap-4 mt-4">
+                    <span>Sold?</span>
+                    <input
+                        type="checkbox"
+                        checked={sold}
+                        onChange={() => setSold(!sold)}
+                        className="toggle-checkbox"
+                    />
+                </label>
                 <button type="submit" className="newpet-button">
                     Update Pet
                 </button>
